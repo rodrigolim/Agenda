@@ -4,9 +4,10 @@ const express = require('express');
 const app = express();
 const routesApi = require('./routes/api');
 const routesTwilio = require('./routes/twilio');
-
 const bodyParser = require('body-parser');
+const cors = require('cors'); 
 
+app.use(cors({ origin: '*' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/', routesApi);

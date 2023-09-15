@@ -17,9 +17,9 @@ router.post('/twilio/webhook', (req, res) => {
   const incomingMessage = req.body.Body;
   const senderPhoneNumber = req.body.Author;
 
-  console.log(incomingMessage.toString())  
+  console.log(incomingMessage)  
   console.log("body  =>  "+req.body)
-  console.log(senderPhoneNumber.toString())
+  console.log(senderPhoneNumber)
 
   // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
   if (incomingMessage.toLowerCase() === 'olá') {
