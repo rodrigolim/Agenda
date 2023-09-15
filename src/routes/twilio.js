@@ -23,7 +23,7 @@ router.post('/twilio/webhook', (req, res) => {
     const senderPhoneNumber = req.body.Author;  
   
     console.log(incomingMessage);
-  
+    console.log(senderPhoneNumber);
   
     // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
     if (incomingMessage.toLowerCase() === 'olá') {
@@ -45,7 +45,7 @@ function sendWhatsAppMessage(to, message) {
   client.messages.create({
     body: message,
     from: 'whatsapp:'+twilioPhoneNumber, // Deve ser um número do Twilio configurado no WhatsApp Business API
-    to: 'whatsapp:'+to    
+    to: to    
   })
   .then(message => console.log(`Mensagem enviada com sucesso: ${message.sid}`))
   .catch(error => console.error(`Erro ao enviar mensagem: ${error}`));
