@@ -1,49 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Agendamento = require('../models/Agendamento');
+const Agendamento = require('.././models/Agendamento');
 const mongoose = require('mongoose'); // Importe o mongoose
-const twilio = require('twilio');
-
-
-// Configuração do Twilio
-const accountSid = 'ACedf51509da1dcc334cadefc9239f892f';
-const authToken = 'f723557a397a6b33e3cb0d47de431133';
-const client = new twilio(accountSid, authToken);
-
-
-// Endpoint para receber mensagens do WhatsApp
-router.post('/webhook', (req, res) => {
-  const incomingMessage = req.body.Body;
-  const senderPhoneNumber = req.body.From;
-
-  // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
-  if (incomingMessage.toLowerCase() === 'olá') {
-    const responseMessage = 'Olá! Como posso ajudar você hoje?';
-    sendWhatsAppMessage(senderPhoneNumber, responseMessage);
-  } else {
-    const responseMessage = 'Desculpe, não entendi. Por favor, faça outra pergunta.';
-    sendWhatsAppMessage(senderPhoneNumber, responseMessage);
-  }
-
-  res.sendStatus(200);
-});
-
-// Função para enviar mensagens de volta para o WhatsApp
-function sendWhatsAppMessage(to, message) {
-  client.messages.create({
-    body: message,
-    from: 'whatsapp:+14155238886', // Deve ser um número do Twilio configurado no WhatsApp Business API
-    to: 'whatsapp:'+to    
-  //  to: 'whatsapp:+553598539000'
-  })
-  .then(message => console.log(`Mensagem enviada com sucesso: ${message.sid}`))
-  .catch(error => console.error(`Erro ao enviar mensagem: ${error}`));
-
-}
-
-
-
-
+const db = require('../db'); // Importe a conexão com o banco de dados
 
 // Função para gerar um _id personalizado
 function generateCustomId() {
