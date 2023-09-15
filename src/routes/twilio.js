@@ -15,24 +15,29 @@ const client = new twilio(accountSid, authToken);
 // Endpoint para receber mensagens do WhatsApp
 router.post('/twilio/webhook', (req, res) => {
 
-  console.log(req.body);
+  if (req.body.Source === 'WHATSAPP'){
 
-  const incomingMessage = req.body.Body;
-  const senderPhoneNumber = req.body.Author;  
+    console.log(req.body);
 
-  console.log(incomingMessage);
+    const incomingMessage = req.body.Body;
+    const senderPhoneNumber = req.body.Author;  
+  
+    console.log(incomingMessage);
+  
+  
+    // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
+    if (incomingMessage.toLowerCase() === 'olá') {
+      const responseMessage = 'Olá! Como posso ajudar você hoje?';
+      sendWhatsAppMessage(senderPhoneNumber, responseMessage);
+    } else {
+      const responseMessage = 'Desculpe, não entendi. Por favor, faça outra pergunta.';
+      sendWhatsAppMessage(senderPhoneNumber, responseMessage);
+    }
+  
+    res.sendStatus(200);
 
-
-  // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
-  if (incomingMessage.toLowerCase() === 'olá') {
-    const responseMessage = 'Olá! Como posso ajudar você hoje?';
-    sendWhatsAppMessage(senderPhoneNumber, responseMessage);
-  } else {
-    const responseMessage = 'Desculpe, não entendi. Por favor, faça outra pergunta.';
-    sendWhatsAppMessage(senderPhoneNumber, responseMessage);
   }
-
-  res.sendStatus(200);
+  
 });
 
 // Função para enviar mensagens de volta para o WhatsApp
