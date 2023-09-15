@@ -17,6 +17,12 @@ const accountSid = 'ACedf51509da1dcc334cadefc9239f892f';
 const authToken = 'f723557a397a6b33e3cb0d47de431133';
 const client = new twilio(accountSid, authToken);
 
+// Endpoint para receber mensagens do WhatsApp
+app.post('/', (req, res) => {
+  const responseMessage = 'Servidor Online.';
+  console.log(responseMessage);
+  res.status(200).json({ message: responseMessage });
+});
 
 // Endpoint para receber mensagens do WhatsApp
 app.post('/webhook', (req, res) => {
