@@ -18,13 +18,12 @@ npm install
 ```
 - após, na pasta root do projeto, inicie um servidor local, por exemplo:
 ```
-npm start
+npm run dev
 ```
 - no browser, abra o endereço abaixo e verifique o funcionamento da API
 ```
 localhost:3000/
 ```
-
 
 ## Modelo de Json para POST
 ```
@@ -33,4 +32,16 @@ localhost:3000/
   "time": "15:00",
   "clientName": "João Silva"
 }
+```
+
+
+## Deploy em Produção
+Build command
+```
+npm install && npm run build
+```
+
+Run command
+```
+npm run start
 ```
