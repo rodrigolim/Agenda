@@ -9,16 +9,17 @@ const twilio = require('twilio');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
-const senderPhoneNumber = process.env.SENDER_PHONE_NUMBER;
 const client = new twilio(accountSid, authToken);
 
 
 // Endpoint para receber mensagens do WhatsApp
 router.post('/twilio/webhook', (req, res) => {
   const incomingMessage = req.body.Body;
+  const senderPhoneNumber = req.body.Author;
 
-  console.log(incomingMessage)
-  console.log(req.body)
+  console.log(incomingMessage)  
+  console.log("body  =>  "+req.body)
+  console.log(senderPhoneNumber)
 
   // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
   if (incomingMessage.toLowerCase() === 'olá') {
