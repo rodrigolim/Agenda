@@ -4,7 +4,9 @@ const express = require('express');
 const app = express();
 const apiRoutes = require('./routes/api');
 const db = require('./db'); // Importe a conexão com o banco de dados
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/api/', apiRoutes);
 
