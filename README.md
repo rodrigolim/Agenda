@@ -3,7 +3,7 @@
 CRUD com Node.JS, express, body-parser, dotenv, mongoose, nodemon e MongoDB
 
 ## Pré-requisitos
-NPM, YARN, PostgreSQL
+NPM, YARN, MongoDB
 
 ## Configurar as Váriaveis de Ambiente
 ```
