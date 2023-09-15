@@ -13,7 +13,7 @@ app.use('/', routesApi);
 app.use('/', routesTwilio);
 
 // Endpoint para receber mensagens do WhatsApp
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
   const responseMessage = 'Servidor Online.';
   console.log(responseMessage);
   res.status(200).json({ message: responseMessage });

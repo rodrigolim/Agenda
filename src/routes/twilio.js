@@ -13,7 +13,7 @@ const client = new twilio(accountSid, authToken);
 
 
 // Endpoint para receber mensagens do WhatsApp
-router.post('/webhook', (req, res) => {
+router.post('/twilio/webhook', (req, res) => {
   const incomingMessage = req.body.Body;
   const senderPhoneNumber = req.body.From;
 

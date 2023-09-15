@@ -17,7 +17,10 @@ const agendamentoSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    // Outros campos relevantes
+    updated_at: { 
+        type: Date, 
+        default: Date.now 
+    },
   });
   
 

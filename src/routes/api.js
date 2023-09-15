@@ -19,7 +19,7 @@ function generateCustomId() {
   }
 
 // Rota de teste para verificar a conexão com o banco de dados
-router.get('/test-db-connection', (req, res) => {
+router.get('/api/test-db-connection', (req, res) => {
     const dbStatus = mongoose.connection.readyState;
     if (dbStatus === 1) {
       res.status(200).json({ message: 'Conexão com o banco de dados estabelecida com sucesso.' });
@@ -29,7 +29,7 @@ router.get('/test-db-connection', (req, res) => {
   });
 
 // Rota para listar todos os agendamentos
-router.get('/agendamentos', async (req, res) => {
+router.get('/api/agendamentos', async (req, res) => {
     try {
       // Consulta o banco de dados para obter todos os agendamentos
       const agendamentos = await Agendamento.find();
@@ -43,7 +43,7 @@ router.get('/agendamentos', async (req, res) => {
 
 
 // Rota para consultar agendamento por data e horário
-router.get('/agendamentos/:date/:time', async (req, res) => {
+router.get('/api/agendamentos/:date/:time', async (req, res) => {
     try {
       const date = req.params.date;
       const time = req.params.time;
@@ -63,7 +63,7 @@ router.get('/agendamentos/:date/:time', async (req, res) => {
   });
 
   // Rota para consultar agendamento por id
-router.get('/agendamentos/:id', async (req, res) => {
+router.get('/api/agendamentos/:id', async (req, res) => {
     try {
         const idString = req.params.id;
   
@@ -82,7 +82,7 @@ router.get('/agendamentos/:id', async (req, res) => {
   });
 
 // Rota para criar um novo agendamento
-router.post('/agendamentos', async (req, res) => {
+router.post('/api/agendamentos', async (req, res) => {
   try {
 
     const customId = generateCustomId();
@@ -114,7 +114,7 @@ router.post('/agendamentos', async (req, res) => {
   }
 });
 
-router.delete('/agendamentos/:id', async (req, res) => {
+router.delete('/api/agendamentos/:id', async (req, res) => {
     try {
         
       const idString = req.params.id;
