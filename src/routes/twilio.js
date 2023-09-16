@@ -26,7 +26,7 @@ router.post('/twilio/webhook', (req, res) => {
     console.log(text);
   
     // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
-    if (text.match('olá')) {
+    if (text.match('ola')) {
       const responseMessage = 'Olá! Como posso ajudar você hoje?';
       sendWhatsAppMessage(senderPhoneNumber, responseMessage);
     } else {
