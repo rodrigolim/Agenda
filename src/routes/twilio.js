@@ -15,15 +15,13 @@ const client = new twilio(accountSid, authToken);
 // Endpoint para receber mensagens do WhatsApp
 router.post('/twilio/webhook', (req, res) => {
 
-    console.log(req.body);
+    //console.log(req.body);
 
     const { Body, From, Author } = req.body
 
     const senderPhoneNumber = (typeof From === 'undefined')  ? Author : From
   
     let text = Body.toLowerCase().replace(/[^\w\s]/gi, "").replace(/[\d]/gi, "").trim();
-
-    console.log(text);
   
     // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
     if (text.match('ola')) {
