@@ -21,12 +21,12 @@ router.post('/twilio/webhook', (req, res) => {
 
     const senderPhoneNumber = (typeof From === 'undefined')  ? Author : From
   
-    console.log(Body);
-    console.log(senderPhoneNumber);
-    console.log(twilioPhoneNumber);
+    let text = Body.toLowerCase().replace(/[^\w\s]/gi, "").replace(/[\d]/gi, "").trim();
+
+    console.log(text);
   
     // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
-    if (Body.toLowerCase() === 'olá') {
+    if (text.match('olá')) {
       const responseMessage = 'Olá! Como posso ajudar você hoje?';
       sendWhatsAppMessage(senderPhoneNumber, responseMessage);
     } else {
