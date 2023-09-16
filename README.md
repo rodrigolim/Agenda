@@ -11,7 +11,7 @@ MONGODB_URI='mongodb://localhost:27017/agenda'
 PORT=3000
 TWILIO_ACCOUNT_SID= // Deve ser um número do Twilio
 TWILIO_AUTHTOKEN= // Deve ser um número do Twilio
-TWILIO_PHONE_NUMBER= // Deve ser um número do Twilio configurado no WhatsApp Business API
+TWILIO_PHONE_NUMBER= // Deve ser um número do Twilio configurado no WhatsApp Business API, sempre seguindo o padrão whatsapp:+14155238886
 ```
 
 ## Instalação

@@ -15,8 +15,6 @@ const client = new twilio(accountSid, authToken);
 // Endpoint para receber mensagens do WhatsApp
 router.post('/twilio/webhook', (req, res) => {
 
-  if (req.body.Source === 'WHATSAPP'){
-
     console.log(req.body);
 
     const incomingMessage = req.body.Body;
@@ -24,6 +22,7 @@ router.post('/twilio/webhook', (req, res) => {
   
     console.log(incomingMessage);
     console.log(senderPhoneNumber);
+    console.log(twilioPhoneNumber);
   
     // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
     if (incomingMessage.toLowerCase() === 'olá') {
@@ -36,15 +35,13 @@ router.post('/twilio/webhook', (req, res) => {
   
     res.sendStatus(200);
 
-  }
-  
 });
 
 // Função para enviar mensagens de volta para o WhatsApp
 function sendWhatsAppMessage(to, message) {
   client.messages.create({
     body: message,
-    from: 'whatsapp:'+twilioPhoneNumber, // Deve ser um número do Twilio configurado no WhatsApp Business API
+    from: twilioPhoneNumber, // Deve ser um número do Twilio configurado no WhatsApp Business API
     to: to    
   })
   .then(message => console.log(`Mensagem enviada com sucesso: ${message.sid}`))
