@@ -34,7 +34,7 @@ router.post('/twilio/webhook', (req, res) => {
       sendWhatsAppMessage(senderPhoneNumber, responseMessage);
     }
   
-    res.sendStatus(200);
+    res.status(200).send('Status: Successful ')
 
 });
 
