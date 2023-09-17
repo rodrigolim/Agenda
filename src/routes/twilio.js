@@ -21,11 +21,27 @@ router.post('/twilio/webhook', (req, res) => {
 
     const senderPhoneNumber = (typeof From === 'undefined')  ? Author : From
   
-    let text = Body.toLowerCase().replace(/[^\w\s]/gi, "").replace(/[\d]/gi, "").trim();
+    const text = Body.toLowerCase().replace(/[^\w\s]/gi, "").replace(/[\d]/gi, "").trim();
   
+    const saudacaoRegex = /(ola|bom|dia|oi)/i; // O "i" torna a regex insensível a maiúsculas/minúsculas
+    const agendamentoRegex = /(marcar|agendamento|agendar)/i; 
+    const cancelarRegex = /(cancelar|excluir|deletar)/i; 
+
+
     // Lógica do chatbot: responder à pergunta "Olá" com uma saudação
-    if (text.match('ola')) {
-      const responseMessage = 'Olá! Como posso ajudar você hoje?';
+    //if (text.match(['ola','bom','dia'])) {
+    if (saudacaoRegex.test(text)) {
+      let responseMessage = 'Olá, tudo bem? Sou o assistente virtual. Como posso ajudar você hoje? \n'+
+                            'Temos as Seguintes opções: \n'+
+                            ' - Marcar horário \n'+
+                            ' - Cancelar horário \n'+
+                            ' - Histórico de horário';
+      sendWhatsAppMessage(senderPhoneNumber, responseMessage);
+    } else  if (agendamentoRegex.test(text)) {
+      let responseMessage = 'Muito bem, me informe seu nome por favor.';
+      sendWhatsAppMessage(senderPhoneNumber, responseMessage);
+    } else  if (cancelarRegex.test(text)) {
+      let responseMessage = 'So um minuto emquanto processo sua solicitação!';
       sendWhatsAppMessage(senderPhoneNumber, responseMessage);
     } else {
       const responseMessage = 'Desculpe, não entendi. Por favor, faça outra pergunta.';

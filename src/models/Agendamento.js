@@ -17,6 +17,10 @@ const agendamentoSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    clientPhone: {
+      type: String,
+      required: true,
+    },
     updated_at: { 
         type: Date, 
         default: Date.now 
