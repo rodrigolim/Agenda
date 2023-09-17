@@ -15,7 +15,7 @@ const client = new twilio(accountSid, authToken);
 // Endpoint para receber mensagens do WhatsApp
 router.post('/twilio/webhook', (req, res) => {
 
-    //console.log(req.body);
+    console.log(req.body);
 
     const { Body, From, Author } = req.body
 
