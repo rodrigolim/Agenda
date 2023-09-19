@@ -1,9 +1,7 @@
 const Agendamento = require('../models/Agendamento');
 
-
-
 // Função para buscar agendamentos
-async function getAgendamentos() {
+async function pesquisarAgendamentos() {
   try {
     const agendamentos = await Agendamento.find(); // Busque todos os objetos de Agendamento
     return agendamentos;
@@ -13,7 +11,7 @@ async function getAgendamentos() {
 }
 
 // Função para buscar agendamento por data e hora
-async function getAgendamentosPorDataHora(date, time) {
+async function pesquisarAgendamentosPorDataHora(date, time) {
   try {
     const agendamento = await Agendamento.findOne({ date, time }); // Busque objetos de Agendamento com a data e hora especificadas
     return agendamento;
@@ -24,7 +22,7 @@ async function getAgendamentosPorDataHora(date, time) {
 
 
 // Função para buscar agendamento por ID
-async function getAgendamentosPorId(id) {
+async function pesquisarAgendamentosPorId(id) {
   try {
     const agendamento = await Agendamento.findById(id); 
     return agendamento;
@@ -35,7 +33,7 @@ async function getAgendamentosPorId(id) {
 
 
 // Função para buscar e deletar o agendamento por ID
-async function deleteAgendamentosPorId(id) {
+async function deletarAgendamentosPorId(id) {
   try {
     const agendamento = await Agendamento.findByIdAndDelete(id); 
     return agendamento;
@@ -61,10 +59,10 @@ function generateCustomId() {
 
 
 // Função para buscar agendamento por data e hora
-async function postAgendamento(date, time, clientName, clientPhone) {
+async function criarAgendamento(date, time, clientName, clientPhone) {
   try {
     // Verifica se já existe um agendamento com a mesma data e hora
-    const existeAgendamento = await getAgendamentosPorDataHora(date, time);
+    const existeAgendamento = await pesquisarAgendamentosPorDataHora(date, time);
 
     if (existeAgendamento) {
       throw new Error('Já existe um agendamento para esta data e hora.');
@@ -88,4 +86,4 @@ async function postAgendamento(date, time, clientName, clientPhone) {
 }
 
 
-module.exports = { getAgendamentos, getAgendamentosPorDataHora, getAgendamentosPorId, postAgendamento, deleteAgendamentosPorId };
+module.exports = { pesquisarAgendamentos, pesquisarAgendamentosPorDataHora, pesquisarAgendamentosPorId, criarAgendamento, deletarAgendamentosPorId };
