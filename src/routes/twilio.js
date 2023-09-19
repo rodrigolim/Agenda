@@ -59,10 +59,8 @@ router.post('/twilio/webhook', (req, res) => {
     switch (objeto1.estado) {
       case Estados.SAUDACAO:
         responseMessage = 'Olá, tudo bem? Sou o assistente virtual. Como posso ajudar você hoje? \n'+
-                          'Temos as Seguintes opções: \n'+
-                          ' - Marcar horário \n'+
-                          ' - Cancelar horário \n'+
-                          ' - Histórico de horário';
+                          'Para lhe auxiliar melhor, nos informe a opção desejada no Menu abaixo 👇: \n'+
+                          ' \n1. - Marcar horário\n2. - Cancelar horário\n3.- Histórico de horário';
         break;
       case Estados.MARCAR: 
               responseMessage = 'Muito bem, me informe seu nome por favor.'; 
