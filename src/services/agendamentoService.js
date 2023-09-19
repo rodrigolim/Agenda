@@ -20,6 +20,16 @@ async function pesquisarAgendamentosPorDataHora(date, time) {
   }
 }
 
+// Função para buscar agendamento por data e hora
+async function pesquisarAgendamentosPorData(date) {
+  try {
+    const agendamento = await Agendamento.findOne({ date }); // Busque objetos de Agendamento com a data especificadas
+    return agendamento;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 
 // Função para buscar agendamento por ID
 async function pesquisarAgendamentosPorId(id) {
@@ -86,4 +96,4 @@ async function criarAgendamento(date, time, clientName, clientPhone) {
 }
 
 
-module.exports = { pesquisarAgendamentos, pesquisarAgendamentosPorDataHora, pesquisarAgendamentosPorId, criarAgendamento, deletarAgendamentosPorId };
+module.exports = { pesquisarAgendamentos, pesquisarAgendamentosPorDataHora, pesquisarAgendamentosPorData, pesquisarAgendamentosPorId, criarAgendamento, deletarAgendamentosPorId };

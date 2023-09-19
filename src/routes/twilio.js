@@ -26,15 +26,14 @@ router.post('/twilio/webhook', (req, res) => {
     objeto1.mensagem = objeto1.mensagem+' - '+Body;
     objeto1.imprimirMensagem();
 
-
-
     const senderPhoneNumber = (typeof From === 'undefined')  ? Author : From
   
     const text = Body.toLowerCase().replace(/[^\w\s]/gi, "").replace(/[\d]/gi, "").trim();
   
     const saudacaoRegex = /(ola|olá|bom|dia|oi)/i; // O "i" torna a regex insensível a maiúsculas/minúsculas
-    const agendamentoRegex = /(marcar|agendamento|agendar)/i; 
-    const cancelarRegex = /(cancelar|excluir|deletar)/i; 
+    const agendamentoRegex = /(marcar|agendamento|agendar|1)/i; 
+    const cancelarRegex = /(cancelar|excluir|deletar|2)/i; 
+    const historicoRegex = /(historico|histórico|3)/i; 
 
     if (saudacaoRegex.test(text)) {
       objeto1.estado = Estados.SAUDACAO;
@@ -46,7 +45,7 @@ router.post('/twilio/webhook', (req, res) => {
       objeto1._nome = text;
       objeto1.estado = Estados.DATA;
     } else if (objeto1.estado === Estados.DATA) {
-      objeto1._nome = text;
+      objeto1._data = text;
       objeto1.estado = Estados.HORA;
     }
 
@@ -60,7 +59,7 @@ router.post('/twilio/webhook', (req, res) => {
       case Estados.SAUDACAO:
         responseMessage = 'Olá, tudo bem? Sou o assistente virtual. Como posso ajudar você hoje? \n'+
                           'Para lhe auxiliar melhor, nos informe a opção desejada no Menu abaixo 👇: \n'+
-                          ' \n1. - Marcar horário\n2. - Cancelar horário\n3.- Histórico de horário';
+                          ' \n1. Marcar horário\n2. Cancelar horário\n3.Histórico de horário';
         break;
       case Estados.MARCAR: 
               responseMessage = 'Muito bem, me informe seu nome por favor.'; 
@@ -70,6 +69,7 @@ router.post('/twilio/webhook', (req, res) => {
               responseMessage = 'Me informe a data pretendida.'; 
               break;
       case Estados.HORA: 
+
               responseMessage = 'Me informe a hora pretendida.'; 
               break;
       default: responseMessage = 'Desculpe, não entendi. Por favor, faça outra pergunta.';        
@@ -98,6 +98,7 @@ class Singleton {
   constructor() {
     this._nome = '';
     this._estado = Estados.UNDEFINED; // Estado padrão
+    this._data = new Date();
   }
 
   get nome() {
@@ -107,7 +108,7 @@ class Singleton {
   set nome(novoNome) {
     this._nome = novoNome;
   }
-
+  
   get estado() {
     return this._estado;
   }
@@ -119,10 +120,18 @@ class Singleton {
       console.error('Estado inválido');
     }
   }
+  
+  get data() {
+    return this._data;
+  }
+  set data(novadata) {
+    this._data = novadata;
+  }
 
   imprimirMensagem() {
     console.log(`Nome: ${this._nome}`);
     console.log(`Estado: ${this._estado}`);
+    console.log(`Data: ${this._data}`);
   }
 
   static getInstance() {
