@@ -1,6 +1,6 @@
 
 # Agenda
-CRUD com Node.JS, express, body-parser, dotenv, mongoose, nodemon e MongoDB
+ChatBot para integração com API twilio e whatsApp com Node.JS, express, body-parser, dotenv, mongoose, nodemon e MongoDB 
 
 ## Pré-requisitos
 NPM, YARN, MongoDB

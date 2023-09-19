@@ -15,11 +15,11 @@ const agendamentoSchema = new mongoose.Schema({
     },
     clientName: {
       type: String,
-      required: true,
+      required: false,
     },
     clientPhone: {
       type: String,
-      required: true,
+      required: false,
     },
     updated_at: { 
         type: Date, 

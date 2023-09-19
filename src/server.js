@@ -7,9 +7,12 @@ const routesTwilio = require('./routes/twilio');
 const bodyParser = require('body-parser');
 const cors = require('cors'); 
 
+const connectDB = require('./database/connect.js'); 
+
 app.use(cors({ origin: '*' }));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use('/', routesApi);
 app.use('/', routesTwilio);
 
