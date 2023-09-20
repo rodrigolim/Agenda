@@ -1,0 +1,204 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Exemplo de API Swagger com Node.js",
+    "description": "Documentação da API Swagger com Node.js",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/iniciar-dia": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "example": "any"
+                },
+                "intervaloEmMinutos": {
+                  "example": "any"
+                },
+                "horarioInicial": {
+                  "example": "any"
+                },
+                "horarioFinal": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/api/agendamentos": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "example": "any"
+                },
+                "time": {
+                  "example": "any"
+                },
+                "clientName": {
+                  "example": "any"
+                },
+                "clientPhone": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/api/agendamentos/{date}/{time}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "time",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/api/agendamentos/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/twilio/webhook": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Body": {
+                  "example": "any"
+                },
+                "From": {
+                  "example": "any"
+                },
+                "Author": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

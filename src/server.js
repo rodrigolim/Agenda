@@ -7,16 +7,19 @@ const routesTwilio = require('./routes/twilio');
 const bodyParser = require('body-parser');
 const cors = require('cors'); 
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('../swagger.json');
+
 const connectDB = require('./database/connect.js'); 
 
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/docs',  swaggerUi.serve,  swaggerUi.setup(swaggerDocs));
 app.use('/', routesApi);
 app.use('/', routesTwilio);
 
-// Endpoint para receber mensagens do WhatsApp
 app.get('/', (req, res) => {
   const responseMessage = 'Servidor Online.';
   console.log(responseMessage);
